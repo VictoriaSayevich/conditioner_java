@@ -4,9 +4,11 @@ public class User {
     private Integer userId;
     private String login;
     private String password;
+    private String name;
 
 
-    public User(Integer userId, String login, String password) {
+    public User(Integer userId, String name, String login, String password) {
+        this.name = name;
         this.userId = userId;
         this.login = login;
         this.password = password;
@@ -34,5 +36,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

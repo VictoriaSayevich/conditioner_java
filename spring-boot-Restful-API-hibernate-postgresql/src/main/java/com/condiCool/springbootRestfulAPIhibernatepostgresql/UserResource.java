@@ -18,8 +18,20 @@ public class UserResource {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody Map<String, Object> userMap) {
+        String login = (String) userMap.get("login");
         String password = (String) userMap.get("password");
-        User user = userController.validateUser(password);
+
+        User user = userController.validateUser(login, password);
+        return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
+    }
+
+    @PostMapping ("/register")
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody Map<String, Object> userMap) {
+        String name = (String) userMap.get("name");
+        String login = (String) userMap.get("login");
+        String password = (String) userMap.get("password");
+
+        User user = userController.registerUser(name, login, password);
         return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
     }
 
