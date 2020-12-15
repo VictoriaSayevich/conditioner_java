@@ -20,11 +20,11 @@ public class User {
         this.userId = userId;
     }
 
-    public String login() {
+    public String getLogin() {
         return login;
     }
 
-    public void setFirstName(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
