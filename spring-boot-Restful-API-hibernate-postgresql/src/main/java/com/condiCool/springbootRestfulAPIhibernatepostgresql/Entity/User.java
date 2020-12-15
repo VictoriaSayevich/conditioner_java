@@ -1,4 +1,4 @@
-package com.condiCool.springbootRestfulAPIhibernatepostgresql;
+package com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity;
 
 public class User {
     private Integer userId;

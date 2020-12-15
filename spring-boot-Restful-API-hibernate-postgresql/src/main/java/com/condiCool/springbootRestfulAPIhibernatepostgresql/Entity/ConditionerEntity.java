@@ -1,4 +1,4 @@
-package com.condiCool.springbootRestfulAPIhibernatepostgresql;
+package com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
