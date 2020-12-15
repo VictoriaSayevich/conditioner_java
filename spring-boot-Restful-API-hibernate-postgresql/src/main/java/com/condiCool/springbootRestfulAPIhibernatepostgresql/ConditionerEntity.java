@@ -11,9 +11,10 @@ import javax.persistence.Table;
 @Table(name = "conditioner")
 public class ConditionerEntity {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer conditionerId;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -28,10 +29,10 @@ public class ConditionerEntity {
 
 
     public Integer getConditionerId() {
-        return conditionerId;
+        return id;
     }
     public void setId(Integer conditionerId) {
-        this.conditionerId = conditionerId;
+        this.id = conditionerId;
     }
 
     public String getName() {
@@ -44,6 +45,6 @@ public class ConditionerEntity {
 
     @Override
     public String toString() {
-        return "Conditioner [conditionerId=" + conditionerId + ", name=" + name + "]";
+        return "Conditioner [conditionerId=" + id + ", name=" + name + "]";
     }
 }
