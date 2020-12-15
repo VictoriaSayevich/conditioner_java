@@ -1,13 +1,12 @@
 package com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity;
 
-public class User {
+public class UserEntity {
     private Integer userId;
     private String login;
     private String password;
     private String name;
 
-
-    public User(Integer userId, String name, String login, String password) {
+    public UserEntity(Integer userId, String name, String login, String password) {
         this.name = name;
         this.userId = userId;
         this.login = login;
