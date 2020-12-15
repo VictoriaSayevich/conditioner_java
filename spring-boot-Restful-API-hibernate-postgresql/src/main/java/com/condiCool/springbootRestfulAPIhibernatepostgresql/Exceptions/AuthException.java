@@ -1,4 +1,4 @@
-package com.condiCool.springbootRestfulAPIhibernatepostgresql;
+package com.condiCool.springbootRestfulAPIhibernatepostgresql.Exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
