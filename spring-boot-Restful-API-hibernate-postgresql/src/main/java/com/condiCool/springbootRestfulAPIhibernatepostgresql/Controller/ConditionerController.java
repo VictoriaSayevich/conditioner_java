@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/api/conditioner")
 public class ConditionerController {
@@ -53,7 +52,7 @@ public class ConditionerController {
                                                          @RequestBody ConditionerEntity conditionerDetails) {
         ConditionerEntity conditioner = conditionerRepository.findById(conditionerId).get();
 
-        conditioner.setName(conditionerDetails.getName());
+        conditioner.setBrend(conditionerDetails.getBrend());
         final ConditionerEntity updatedConditioner = conditionerRepository.save(conditioner);
         return ResponseEntity.ok(updatedConditioner);
     }
