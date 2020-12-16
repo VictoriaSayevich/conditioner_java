@@ -11,14 +11,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-//    Integer create(String name, String login, String password);
-//
-//    UserEntity findByLoginAndPassword(String login, String password);
-//
-//    Integer getCountByLogin(String login);
-//
-//    UserEntity findById(Integer userId);
-
     @Query(value = "SELECT id, name, login, password FROM USERS WHERE login = ?1", nativeQuery = true)
     UserEntity findByLoginAndPassword(String login, String password);
 
