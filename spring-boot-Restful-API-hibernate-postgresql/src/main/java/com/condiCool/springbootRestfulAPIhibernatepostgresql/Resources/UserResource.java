@@ -29,8 +29,6 @@ public class UserResource {
         String login = (String) userMap.get("login");
         String password = (String) userMap.get("password");
 
-        System.out.println("!!!!!!" + login + " " + password);
-
         UserEntity userEntity = userRepository.findByLoginAndPassword(login, password);
         return ResponseEntity.ok(generateJWTToken(userEntity));
     }
@@ -47,7 +45,6 @@ public class UserResource {
            throw new AuthException("Login already in use");
         Integer userId = userRepository.create(name, login, password);
         UserEntity userEntity = userRepository.findUserById(userId);
-
 
         return ResponseEntity.ok(generateJWTToken(userEntity));
     }
