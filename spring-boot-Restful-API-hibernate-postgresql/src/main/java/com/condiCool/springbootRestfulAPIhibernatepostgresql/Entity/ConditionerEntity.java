@@ -1,5 +1,8 @@
 package com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "conditioner")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="price")
 public class ConditionerEntity {
 
     @Id
@@ -123,7 +127,7 @@ public class ConditionerEntity {
     }
 
     public Integer getCooling_capacity() { return cooling_capacity; }
-    public void setPrice(Integer cooling_capacity) {
+    public void setCooling_capacity(Integer cooling_capacity) {
         this.cooling_capacity = cooling_capacity;
     }
 
