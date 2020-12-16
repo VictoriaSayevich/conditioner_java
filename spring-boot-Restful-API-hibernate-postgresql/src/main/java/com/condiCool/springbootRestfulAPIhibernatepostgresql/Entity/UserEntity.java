@@ -5,7 +5,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-    private Integer userId;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "login", nullable = false)
     private String login;
 
     @Column(name = "password", nullable = false)
