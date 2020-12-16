@@ -7,6 +7,7 @@ import java.util.Map;
 import com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity.ConditionerEntity;
 import com.condiCool.springbootRestfulAPIhibernatepostgresql.Repositories.ConditionerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class ConditionerController {
     ConditionerRepository conditionerRepository;
 
     @GetMapping("/get-all-conditioner")
-    public List<ConditionerEntity> getAllEmployee(){
+    public List<ConditionerEntity> getAllConditioner(){
         List<ConditionerEntity> allConditionerlist = conditionerRepository.findAll();
         return allConditionerlist;
     }
@@ -58,7 +59,7 @@ public class ConditionerController {
     }
 
     @DeleteMapping("/delete-conditioner/{id}")
-    public Map<String, Boolean> deleteEConditioner(@PathVariable(value = "id") Integer conditionerId)
+    public Map<String, Boolean> deleteConditioner(@PathVariable(value = "id") Integer conditionerId)
     {
         ConditionerEntity conditioner = conditionerRepository.findById(conditionerId).get();
 
