@@ -1,8 +1,9 @@
 package com.condiCool.springbootRestfulAPIhibernatepostgresql.Resources;
 
 import com.condiCool.springbootRestfulAPIhibernatepostgresql.Constants;
-import com.condiCool.springbootRestfulAPIhibernatepostgresql.Controller.UserController;
 import com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity.UserEntity;
+import com.condiCool.springbootRestfulAPIhibernatepostgresql.Exceptions.AuthException;
+import com.condiCool.springbootRestfulAPIhibernatepostgresql.Repositories.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,17 @@ import java.util.Map;
 @RequestMapping("/api/user")
 public class UserResource {
     @Autowired
-    UserController userController;
+    UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> loginUser(@RequestBody Map<String, Object> userMap) {
         String login = (String) userMap.get("login");
         String password = (String) userMap.get("password");
 
-        UserEntity userEntity = userController.validateUser(login, password);
-        return new ResponseEntity<>(generateJWTToken(userEntity), HttpStatus.OK);
+        System.out.println("!!!!!!" + login + " " + password);
+
+        UserEntity userEntity = userRepository.findByLoginAndPassword(login, password);
+        return ResponseEntity.ok(generateJWTToken(userEntity));
     }
 
     @PostMapping ("/register")
@@ -38,8 +41,15 @@ public class UserResource {
         String login = (String) userMap.get("login");
         String password = (String) userMap.get("password");
 
-        UserEntity userEntity = userController.registerUser(name, login, password);
-        return new ResponseEntity<>(generateJWTToken(userEntity), HttpStatus.OK);
+        Integer count = userRepository.getCountByLogin(login);
+
+        if(count > 0)
+           throw new AuthException("Login already in use");
+        Integer userId = userRepository.create(name, login, password);
+        UserEntity userEntity = userRepository.findUserById(userId);
+
+
+        return ResponseEntity.ok(generateJWTToken(userEntity));
     }
 
     private Map<String, String> generateJWTToken(UserEntity userEntity) {
@@ -47,8 +57,8 @@ public class UserResource {
         String token = Jwts.builder().signWith(SignatureAlgorithm.HS256, Constants.API_SECRET_KEY)
                 .setIssuedAt(new Date(timestamp))
                 .setExpiration(new Date(timestamp + Constants.TOKEN_VALIDITY))
-                .claim("userId", userEntity.getUserId())
-                .claim("userLogin", userEntity.getLogin())
+                .claim("id", userEntity.getUserId())
+                .claim("login", userEntity.getLogin())
                 .compact();
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
