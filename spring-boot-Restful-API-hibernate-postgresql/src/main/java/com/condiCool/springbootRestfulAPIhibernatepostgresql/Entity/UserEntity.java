@@ -1,24 +1,34 @@
 package com.condiCool.springbootRestfulAPIhibernatepostgresql.Entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class UserEntity {
     private Integer userId;
     private String login;
-    private String password;
-    private String name;
 
-    public UserEntity(Integer userId, String name, String login, String password) {
+    @Column(name = "password", nullable = false)
+    private String password;
+
+
+    public UserEntity() {
+
+    }
+
+    public UserEntity(Integer id, String name, String login, String password) {
         this.name = name;
-        this.userId = userId;
+        this.id = id;
         this.login = login;
         this.password = password;
     }
 
     public Integer getUserId() {
-        return userId;
+        return id;
     }
 
     public void setUserId(Integer userId) {
-        this.userId = userId;
+        this.id = id;
     }
 
     public String getLogin() {
