@@ -36,7 +36,6 @@ public class ConditionerController {
 
     {
         ConditionerEntity conditionerEntity = conditionerRepository.findById(conditionerId).get();
-
         return conditionerEntity;
     }
 
@@ -54,6 +53,18 @@ public class ConditionerController {
         ConditionerEntity conditioner = conditionerRepository.findById(conditionerId).get();
 
         conditioner.setBrend(conditionerDetails.getBrend());
+        conditioner.setModel(conditionerDetails.getModel());
+        conditioner.setType(conditionerDetails.getType());
+        conditioner.setInside_block(conditionerDetails.getInside_block());
+        conditioner.setOperating_mode(conditionerDetails.getOperating_mode());
+        conditioner.setAir_filter(conditionerDetails.getAir_filter());
+        conditioner.setInvertor(conditionerDetails.getInvertor());
+        conditioner.setCooling_capacity(conditionerDetails.getCooling_capacity());
+        conditioner.setRefrigerant_type(conditionerDetails.getRefrigerant_type());
+        conditioner.setRemote_manage(conditionerDetails.getRemote_manage());
+        conditioner.setCountry(conditionerDetails.getCountry());
+        conditioner.setPrice(conditionerDetails.getPrice());
+
         final ConditionerEntity updatedConditioner = conditionerRepository.save(conditioner);
         return ResponseEntity.ok(updatedConditioner);
     }
