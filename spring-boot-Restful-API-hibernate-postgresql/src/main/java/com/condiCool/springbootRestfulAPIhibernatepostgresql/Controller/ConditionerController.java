@@ -33,7 +33,6 @@ public class ConditionerController {
 
     @GetMapping("/get-conditioner/{id}")
     public ConditionerEntity getConditionerById(@PathVariable(value = "id") Integer conditionerId)
-
     {
         ConditionerEntity conditionerEntity = conditionerRepository.findById(conditionerId).get();
         return conditionerEntity;
@@ -41,9 +40,7 @@ public class ConditionerController {
 
     @PostMapping("/create-conditioner")
     public ConditionerEntity createConditioner(@RequestBody ConditionerEntity conditioner) {
-
         ConditionerEntity savedConditioner = conditionerRepository.save(conditioner);
-
         return savedConditioner;
     }
 
@@ -64,6 +61,7 @@ public class ConditionerController {
         conditioner.setRemote_manage(conditionerDetails.getRemote_manage());
         conditioner.setCountry(conditionerDetails.getCountry());
         conditioner.setPrice(conditionerDetails.getPrice());
+        conditioner.setImg_url(conditionerDetails.getImg_url());
 
         final ConditionerEntity updatedConditioner = conditionerRepository.save(conditioner);
         return ResponseEntity.ok(updatedConditioner);

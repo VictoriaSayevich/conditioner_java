@@ -30,18 +30,19 @@ public class SpringBootRestfulApiHibernatePostgresqlApplication {
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/**", config);
 		registrationBean.setFilter(new CorsFilter(source));
 		registrationBean.setOrder(0);
 		return registrationBean;
 	}
 
-//	@Bean
-//	public FilterRegistrationBean<AuthFilter> filterRegistrationBean() {
-//		FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
-//		AuthFilter authFilter = new AuthFilter();
-//		registrationBean.setFilter(authFilter);
-//		registrationBean.addUrlPatterns("/api/user/*");
-//		return registrationBean;
-//	}
+	@Bean
+	public FilterRegistrationBean<AuthFilter> filterRegistrationBean() {
+		FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
+		AuthFilter authFilter = new AuthFilter();
+		registrationBean.setFilter(authFilter);
+		registrationBean.addUrlPatterns("/api/conditioner/*");
+		return registrationBean;
+	}
 }

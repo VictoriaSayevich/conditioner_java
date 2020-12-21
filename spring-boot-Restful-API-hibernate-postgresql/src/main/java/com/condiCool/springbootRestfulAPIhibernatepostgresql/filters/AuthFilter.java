@@ -13,22 +13,30 @@ import com.condiCool.springbootRestfulAPIhibernatepostgresql.Constants;
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpServletResponse;
         import java.io.IOException;
+import java.util.Objects;
 
 public class AuthFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+
+        if(Objects.equals(httpRequest.getMethod(), "GET")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
 
         String authHeader = httpRequest.getHeader("Authorization");
         if(authHeader != null) {
             String[] authHeaderArr = authHeader.split("Bearer ");
+            System.out.println(authHeaderArr);
             if(authHeaderArr.length > 1 && authHeaderArr[1] != null) {
                 String token = authHeaderArr[1];
                 try {
                     Claims claims = Jwts.parser().setSigningKey(Constants.API_SECRET_KEY)
                             .parseClaimsJws(token).getBody();
-                    httpRequest.setAttribute("userId", Integer.parseInt(claims.get("userId").toString()));
+                    httpRequest.setAttribute("id", Integer.parseInt(claims.get("id").toString()));
                 }catch (Exception e) {
                     httpResponse.sendError(HttpStatus.FORBIDDEN.value(), "invalid/expired token");
                     return;
@@ -38,6 +46,7 @@ public class AuthFilter extends GenericFilterBean {
                 return;
             }
         } else {
+
             httpResponse.sendError(HttpStatus.FORBIDDEN.value(), "Authorization token must be provided");
             return;
         }

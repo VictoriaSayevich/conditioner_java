@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "conditioner")
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="price")
@@ -24,6 +25,9 @@ public class ConditionerEntity {
 
     @Column(name = "model", nullable = true)
     private String model;
+
+    @Column(name = "img_url", nullable = true)
+    private String img_url;
 
     @Column(name = "type", nullable = true)
     private String type;
@@ -79,6 +83,11 @@ public class ConditionerEntity {
     public String getModel() { return model; }
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public String getImg_url() { return img_url; }
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
     public String getType() { return type; }
